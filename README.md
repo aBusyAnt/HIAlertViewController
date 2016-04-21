@@ -13,14 +13,15 @@ A Custom AlertViewController like UIAlertViewController after iOS8, I write this
 # Custom(Your Can custom any view)
 +  Font
 +  Color
+
 # iOS system required 
 iOS7
 
-# build depends on 
+# build depends on(Thanks) 
 [Masonry](https://github.com/SnapKit/Masonry)
 
-#Reference
-MSAlertViewController
+#Reference(Thanks)
+[MSAlertViewController](https://github.com/szk-atmosphere/MSAlertController)
 
 #Usage
   @property (weak, nonatomic) UITextField *nameField;
