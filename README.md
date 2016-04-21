@@ -10,11 +10,9 @@ A Custom AlertViewController like UIAlertViewController after iOS8, I write this
 +  UITextField
 +  UIView
 
-# Custom
-  Your Can custom any view include
+# Custom(Your Can custom any view)
 +  Font
 +  Color
-+  
 # iOS system required 
 iOS7
 
