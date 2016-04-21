@@ -24,12 +24,12 @@ iOS7
 [MSAlertViewController](https://github.com/szk-atmosphere/MSAlertController)
 
 #Usage
-  @property (weak, nonatomic) UITextField *nameField;
+    //@property (weak, nonatomic) UITextField *nameField;
 
-  __weak __typeof(&*self)weakSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
 
-  HIAlertController *hiAlert = [HIAlertController alertControllerWithTitle:title message:message preferredStyle:HIAlertControllerStyleAlert];
-      HIAlertAction *action = [HIAlertAction actionWithTitle:@"OK" style:HIAlertActionStyleCancel handler:^(HIAlertAction *action) {
+    HIAlertController *hiAlert = [HIAlertController alertControllerWithTitle:title message:message preferredStyle:HIAlertControllerStyleAlert];
+    HIAlertAction *action = [HIAlertAction actionWithTitle:@"OK" style:HIAlertActionStyleCancel handler:^(HIAlertAction *action) {
         NSLog(@"Cancel action tapped %@", action);
         NSLog(@"weakSelf.nameField:%@",self.nameField);
     }];
@@ -47,7 +47,7 @@ iOS7
 
         weakSelf.nameField = textfield;
     }];
-    
+
     [hiAlert showInController:self animated:YES];
 
   
