@@ -65,7 +65,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
                                                                                                      }];
     HIAlertController *actionSheet = [HIAlertController alertControllerWithTitleAttributedString:titleAttributStr messageAttributedString:nil preferredStyle:HIAlertControllerStyleActionSheet];
     HIAlertAction *action1 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option1", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
-        [weakSelf genderChanged:HIGenderMale];
+        //awesome
     }];
     action1.font = [UIFont systemFontOfSize:20];
     action1.titleColor = [UIColor colorWithRGBHex:0x000000];
@@ -73,7 +73,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
     [actionSheet addAction:action1];
 
     HIAlertAction *action2 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option2", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
-        [weakSelf genderChanged:HIGenderFemale];
+       //awesome
     }];
     action2.font = [UIFont systemFontOfSize:20];
     action2.titleColor = [UIColor colorWithRGBHex:0x000000];
@@ -81,7 +81,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
     [actionSheet addAction:action2];
 
     HIAlertAction *action3 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option3", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
-        [weakSelf genderChanged:HIGenderOther];
+        //awesome
     }];
     action3.font = [UIFont systemFontOfSize:20];
     action3.titleColor = [UIColor colorWithRGBHex:0x000000];
