@@ -64,29 +64,29 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
                                                                                                      NSFontAttributeName:[UIFont systemFontOfSize:20]
                                                                                                      }];
     HIAlertController *actionSheet = [HIAlertController alertControllerWithTitleAttributedString:titleAttributStr messageAttributedString:nil preferredStyle:HIAlertControllerStyleActionSheet];
-    HIAlertAction *maleAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option1", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
+    HIAlertAction *action1 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option1", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderMale];
     }];
-    maleAction.font = [UIFont systemFontOfSize:20];
-    maleAction.titleColor = [UIColor colorWithRGBHex:0x000000];
-    maleAction.icon = [UIImage imageNamed:@"Option1"];
-    [actionSheet addAction:maleAction];
+    action1.font = [UIFont systemFontOfSize:20];
+    action1.titleColor = [UIColor colorWithRGBHex:0x000000];
+    action1.icon = [UIImage imageNamed:@"Option1"];
+    [actionSheet addAction:action1];
 
-    HIAlertAction *femaleAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option2", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
+    HIAlertAction *action2 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option2", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderFemale];
     }];
-    femaleAction.font = [UIFont systemFontOfSize:20];
-    femaleAction.titleColor = [UIColor colorWithRGBHex:0x000000];
-    femaleAction.icon = [UIImage imageNamed:@"Option2"];
-    [actionSheet addAction:femaleAction];
+    action2.font = [UIFont systemFontOfSize:20];
+    action2.titleColor = [UIColor colorWithRGBHex:0x000000];
+    action2.icon = [UIImage imageNamed:@"Option2"];
+    [actionSheet addAction:action2];
 
-    HIAlertAction *otherAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option3", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
+    HIAlertAction *action3 = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option3", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderOther];
     }];
-    otherAction.font = [UIFont systemFontOfSize:20];
-    otherAction.titleColor = [UIColor colorWithRGBHex:0x000000];
-    otherAction.icon = [UIImage imageNamed:@"Option3"];
-    [actionSheet addAction:otherAction];
+    action3.font = [UIFont systemFontOfSize:20];
+    action3.titleColor = [UIColor colorWithRGBHex:0x000000];
+    action3.icon = [UIImage imageNamed:@"Option3"];
+    [actionSheet addAction:action3];
 
     HIAlertAction *cancelAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:HIAlertActionStyleCancel handler:^(HIAlertAction *action) {
     }];
