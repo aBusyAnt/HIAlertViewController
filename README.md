@@ -20,12 +20,13 @@ iOS7+
 # Build Depends
 [Masonry](https://github.com/SnapKit/Masonry)
 Apple's Autolayout is so ugly,So I layout views with Masonry.
-#Reference
+
+# Reference
 [MSAlertViewController](https://github.com/szk-atmosphere/MSAlertController)
 
-#Usage
+# Usage
 
-+  Alert with button and UITextfield Example
+## Alert with button and UITextfield Example
 
     //@property (weak, nonatomic) UITextField *nameField;
 
@@ -54,7 +55,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
     [hiAlert showInController:self animated:YES];
 
 
-+  ActionSheet With Buttons,button include icon and title
+## ActionSheet With Buttons,button include icon and title
 
     __weak typeof(self) weakSelf = self;
 
