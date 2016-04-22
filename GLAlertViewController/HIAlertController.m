@@ -361,16 +361,16 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 }
 
 
-- (void)showInController:(UIViewController *)controller animated:(BOOL)animated {
+- (void)showInController:(UIViewController *)controller {
     if (self.preferredStyle == HIAlertControllerStyleActionSheet || self.preferredStyle == HIAlertControllerStyleAlert) {
         [self setupActions];
     }
-//    [controller presentTransparentViewController:self animated:animated completion:nil];
+    //    [controller presentTransparentViewController:self animated:animated completion:nil];
     [controller presentViewController:self animated:NO completion:nil];
 }
 
-- (void)dismissAnimated:(BOOL)animated {
-    [self dismissViewControllerAnimated:animated completion:nil];
+- (void)dismiss {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma  mark - Init With title and message
@@ -434,7 +434,9 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         self.textFieldMargin = 0.0f;
         self.textFieldHeight = 20.0f;
         self.animation = [[MSAlertAnimation alloc] init];
-
+        self.textFieldContainerMargin = 8.0f;
+        self.titleMargin = 10.0f;
+        self.messageMargin = 8.0f;
         disabledColor = [UIColor colorWithRed:131.0f/255.0f green:131.0f/255.0f blue:131.0f/255.0f alpha:1.0f];
     }
     return self;
@@ -447,6 +449,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 - (id)initWithView:(UIView *)view {
     self = [super init];
     if (self) {
+        self.preferredStyle = HIAlertControllerStyleCustomView;
         self.customView = view;
         self.alpha = 0.5f;
         self.backgroundColor = [UIColor blackColor];
@@ -556,7 +559,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     self.tableViewHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 270, 96)];
     CGFloat tableHeaderHeight = 0.0f;
 
-    UIEdgeInsets titleLabelPadding = UIEdgeInsetsMake(8, 18, 8, 18);
+    UIEdgeInsets titleLabelPadding = UIEdgeInsetsMake(self.titleMargin, 18, self.titleMargin, 18);
     CGFloat titleLabelWidth = self.tableViewHeader.bounds.size.width - titleLabelPadding.left - titleLabelPadding.right;
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabelPadding.left, 22, titleLabelWidth, 16)];
     self.titleLabel.numberOfLines = 0;
@@ -592,7 +595,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     tableHeaderHeight += titleLabelPadding.top + titleLabelHeight;
 
 
-    UIEdgeInsets messageLabelPadding = UIEdgeInsetsMake(8, 18, 8, 18);
+    UIEdgeInsets messageLabelPadding = UIEdgeInsetsMake(self.messageMargin, 18, self.messageMargin, 18);
     CGFloat messageLabelWidth = titleLabelWidth;
     self.messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(messageLabelPadding.left, 46, messageLabelWidth, 14)];
     self.messageLabel.numberOfLines = 0;
@@ -624,9 +627,13 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     }];
     tableHeaderHeight += messageLabelPadding.top + messageLabelHeight;
 
+    if ([self titleAndMessageIsNull]) {
+        tableHeaderHeight = 0.0f;
+    }
+
     //add textfield if need
     NSInteger textFieldCount = self.textFields.count;
-    UIEdgeInsets textFieldContentViewPadding = UIEdgeInsetsMake(8, 10, 8, 10);
+    UIEdgeInsets textFieldContentViewPadding = UIEdgeInsetsMake(self.textFieldContainerMargin, 10, self.textFieldContainerMargin, 10);
     if (textFieldCount > 0) {
         self.textFieldContentView = [[UIView alloc]initWithFrame:CGRectZero];
         self.textFieldContentView.backgroundColor = [UIColor whiteColor];
@@ -639,22 +646,26 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         tableHeaderHeight += textFieldContentViewPadding.top;
 
         CGFloat textFieldMarginH = self.textFieldMargin;
-        CGFloat textFieldHeight = self.textFieldHeight;
+        __block CGFloat textFieldsTotalHeight = 0.0f;
         [self.textFields enumerateObjectsUsingBlock:^(UITextField *textField, NSUInteger index, BOOL *stop) {
             CGRect textFieldFrame = textField.frame;
-            CGFloat textFieldOriginY = index * (textFieldHeight + textFieldMarginH);
-            textFieldFrame.origin.y = textFieldOriginY;
-            textField.frame = textFieldFrame;
+            CGFloat theTextFieldHeight = textFieldFrame.size.height;
+            //            CGFloat textFieldOriginY = index * (textFieldHeight + textFieldMarginH);
+
+            //            textFieldFrame.origin.y = textFieldOriginY;
+            //            textField.frame = textFieldFrame;
             [self.textFieldContentView addSubview:textField];
             [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(ws.textFieldContentView.mas_left);
                 make.right.equalTo(ws.textFieldContentView.mas_right);
-                make.height.mas_equalTo(textFieldHeight);
-                make.top.equalTo(ws.textFieldContentView.mas_top).with.offset(textFieldOriginY);
+                make.height.mas_equalTo(theTextFieldHeight);
+                make.top.equalTo(ws.textFieldContentView.mas_top).with.offset(textFieldsTotalHeight);
             }];
+
+            textFieldsTotalHeight += (theTextFieldHeight + textFieldMarginH);
         }];
 
-        CGFloat textFieldContentViewHeight = textFieldCount * textFieldHeight + (textFieldCount-1) * textFieldMarginH ;
+        CGFloat textFieldContentViewHeight = textFieldsTotalHeight ;
         [self.textFieldContentView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(textFieldContentViewHeight);
         }];
@@ -665,16 +676,19 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     }
 
     //Add line between header and tableview
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = self.separatorColor;
-    [self.tableViewHeader addSubview:line];
-    line.translatesAutoresizingMaskIntoConstraints = NO;
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(1.0);
-        make.left.equalTo(ws.tableViewHeader.mas_left);
-        make.right.equalTo(ws.tableViewHeader.mas_right);
-        make.bottom.equalTo(ws.tableViewHeader.mas_bottom);
-    }];
+    UIView *line = nil;
+    if (![self titleAndMessageIsNull]) {
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = self.separatorColor;
+        [self.tableViewHeader addSubview:line];
+        line.translatesAutoresizingMaskIntoConstraints = NO;
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(1.0);
+            make.left.equalTo(ws.tableViewHeader.mas_left);
+            make.right.equalTo(ws.tableViewHeader.mas_right);
+            make.bottom.equalTo(ws.tableViewHeader.mas_bottom);
+        }];
+    }
     //create custom button while 2 actions
     NSInteger actionCount = self.actions.count;
     if (self.preferredStyle == HIAlertControllerStyleAlert && actionCount == 2) {
@@ -690,9 +704,11 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         }];
         [self setupCustom2ButtonInView:actionContainer];
         //
-        [line mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(ws.tableViewHeader.mas_bottom).with.offset(-kActionRowHeight);
-        }];
+        if(line) {
+            [line mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(ws.tableViewHeader.mas_bottom).with.offset(-kActionRowHeight);
+            }];
+        }
         tableHeaderHeight += kActionRowHeight;
 
         if (textFieldCount > 0) {
@@ -708,6 +724,9 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     self.tableViewHeader.frame = headerFrame;
 
     self.tableHeaderHeight = tableHeaderHeight;
+}
+- (BOOL)titleAndMessageIsNull{
+    return !self.title && !self.message && !self.titleAttributedString && !self.messageAttributedString;
 }
 - (void)setupCustom2ButtonInView:(UIView *)actionContrainer {
     UIView *line = [[UIView alloc] init];
@@ -901,26 +920,61 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
 
     HIAlertAction *action = [self.actions objectAtIndex:indexPath.row];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, cell.frame.size.height)];
-    titleLabel.text = action.title;
-    titleLabel.textColor = action.titleColor;
-    titleLabel.font = action.font;
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [cell.contentView addSubview:titleLabel];
+    CGFloat totalWidth = self.tableView.frame.size.width;
+    CGFloat textLabelRealWidth = totalWidth;
+    if (action.icon) {
+        CGSize iconSize = action.icon.size;
+        NSDictionary *options = @{ NSFontAttributeName : action.font };
+        CGFloat margin = 10.0f;
+        CGFloat textLabelWidth = totalWidth - iconSize.width - margin;
+        CGRect boundingRect = [action.title boundingRectWithSize:CGSizeMake(textLabelWidth, NSIntegerMax)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                      attributes:options context:nil];
 
-    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(cell.contentView);
-    }];
+        UIImageView *iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, iconSize.width, iconSize.height)];
+        iconImageView.image = action.icon;
+        [cell.contentView addSubview:iconImageView];
+
+        CGFloat leftMargin = (totalWidth - iconSize.width - boundingRect.size.width) / 2.0;
+        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.contentView.mas_left).with.offset(leftMargin);
+            make.width.mas_equalTo(iconSize.width);
+            make.centerY.equalTo(cell.contentView.mas_centerY);
+        }];
+        textLabelRealWidth = boundingRect.size.width + leftMargin;
+    }
+    if (action.title) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textLabelRealWidth, cell.frame.size.height)];
+        titleLabel.text = action.title;
+        titleLabel.textColor = action.titleColor;
+        titleLabel.font = action.font;
+        if (action.icon) {
+            titleLabel.textAlignment = NSTextAlignmentLeft;
+        } else {
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        [cell.contentView addSubview:titleLabel];
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (action.icon) {
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.right.equalTo(cell.contentView.mas_right);
+                make.width.mas_equalTo(textLabelRealWidth);
+            } else {
+                make.edges.equalTo(cell.contentView);
+            }
+        }];
+        if (!action.enabled) {
+            titleLabel.textColor = disabledColor;
+        }
+    }
     cell.separatorInset = UIEdgeInsetsZero;
     if ([cell respondsToSelector:@selector(layoutMargins)]) {
         cell.layoutMargins = UIEdgeInsetsZero;
     }
 
     cell.userInteractionEnabled = action.enabled;
-    if (!action.enabled) {
-        titleLabel.textColor = disabledColor;
-    }
 
     if (action.normalColor) {
         cell.backgroundColor = action.normalColor;
@@ -996,11 +1050,11 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    
+
     WS(ws);
-    
+
     //Only Care Alert,Only Alert support UITextField
-    
+
     [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(ws.view);
     }];
@@ -1019,5 +1073,4 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     self.animation.isPresenting = NO;
     return self.animation;
 }
-
 @end

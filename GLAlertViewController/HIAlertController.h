@@ -6,8 +6,6 @@
 //  Blog: http://grayluo.github.io/WeiFocusIo/
 //
 
-#import <UIKit/UIKit.h>
-
 
 #import <UIKit/UIKit.h>
 
@@ -34,6 +32,7 @@ typedef NS_ENUM(NSInteger, HIAlertControllerStyle) {
 @property (strong, nonatomic) UIFont *font;
 @property (strong, nonatomic) UIColor *normalColor;
 @property (strong, nonatomic) UIColor *highlightedColor;
+@property (strong, nonatomic) UIImage *icon;//Only ActionSheet with style HIAlertActionStyleDefault and Alert action count is not equal 2 supported
 
 + (instancetype)actionWithTitle:(NSString *)title style:(HIAlertActionStyle)style handler:(void (^)(HIAlertAction *action))handler;
 
@@ -56,19 +55,24 @@ typedef NS_ENUM(NSInteger, HIAlertControllerStyle) {
 @property (assign, nonatomic) CGFloat alpha;
 @property (strong, nonatomic) UIColor *alertBackgroundColor;
 @property (strong, nonatomic) UIColor *separatorColor;
+@property (assign, nonatomic) CGFloat textFieldContainerMargin;
 @property (assign, nonatomic) CGFloat textFieldMargin;
 @property (assign, nonatomic) CGFloat textFieldHeight;
+@property (assign, nonatomic) CGFloat titleMargin;
+@property (assign, nonatomic) CGFloat messageMargin;
+
 @property (assign, nonatomic) BOOL enabledBlurEffect;
 
 + (instancetype)alertControllerWithView:(UIView *)view;
-- (void)showInController:(UIViewController *)controller animated:(BOOL)animated;
+- (void)showInController:(UIViewController *)controller;
 + (instancetype)alertControllerWithTitle:(NSString *)title message:(NSString *)message
                           preferredStyle:(HIAlertControllerStyle)preferredStyle;
 + (instancetype)alertControllerWithTitleAttributedString:(NSAttributedString *)titleAttributedString
                                  messageAttributedString:(NSAttributedString *)messageAttributedString
                                           preferredStyle:(HIAlertControllerStyle)preferredStyle;
-- (void)dismissAnimated:(BOOL)animated;
+- (void)dismiss;
 - (void)addAction:(HIAlertAction *)action;
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *))configurationHandler;
 
 @end
+
