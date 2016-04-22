@@ -14,13 +14,13 @@ A Custom AlertViewController like UIAlertViewController after iOS8, I write this
 +  Font
 +  Color
 
-# iOS system required 
-iOS7
+# Run System Required 
+iOS7+
 
-# build depends on(Thanks) 
+# build depends
 [Masonry](https://github.com/SnapKit/Masonry)
 
-#Reference(Thanks)
+#Reference
 [MSAlertViewController](https://github.com/szk-atmosphere/MSAlertController)
 
 #Usage
