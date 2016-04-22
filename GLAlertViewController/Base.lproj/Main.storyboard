@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EI6-fR-4Zc">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uqd-2R-aCo">
+                                <rect key="frame" x="237" y="146" width="126" height="30"/>
+                                <state key="normal" title="Alert With Buttons"/>
+                                <connections>
+                                    <action selector="alertWithButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bxv-zj-rEp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALl-nU-uXs">
+                                <rect key="frame" x="231" y="184" width="139" height="30"/>
+                                <state key="normal" title="Alert With 2 Buttons"/>
+                                <connections>
+                                    <action selector="alertWith2Buttons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eD6-GS-oca"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuG-vf-iZG">
+                                <rect key="frame" x="233" y="222" width="135" height="30"/>
+                                <state key="normal" title="Alert With TextField"/>
+                                <connections>
+                                    <action selector="alertWithTextFields:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOv-BR-dVv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl0-2s-dw6">
+                                <rect key="frame" x="215" y="301" width="171" height="30"/>
+                                <state key="normal" title="ActionSheet With Cancel"/>
+                                <connections>
+                                    <action selector="actionSheetWithCancel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CwZ-ed-fBm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc2-yI-pZi">
+                                <rect key="frame" x="204" y="345" width="193" height="30"/>
+                                <state key="normal" title="ActionSheet Without Cancel"/>
+                                <connections>
+                                    <action selector="actionSheetWithoutCancel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lNL-xR-5EX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ALl-nU-uXs" firstAttribute="centerX" secondItem="KuG-vf-iZG" secondAttribute="centerX" id="I8b-GS-qrW"/>
+                            <constraint firstItem="KuG-vf-iZG" firstAttribute="centerX" secondItem="hl0-2s-dw6" secondAttribute="centerX" id="MUA-ZA-hdq"/>
+                            <constraint firstItem="Uqd-2R-aCo" firstAttribute="centerX" secondItem="ALl-nU-uXs" secondAttribute="centerX" id="Q3P-55-Yu7"/>
+                            <constraint firstItem="hl0-2s-dw6" firstAttribute="centerX" secondItem="sc2-yI-pZi" secondAttribute="centerX" id="U1J-U9-NdL"/>
+                            <constraint firstItem="hl0-2s-dw6" firstAttribute="top" secondItem="KuG-vf-iZG" secondAttribute="bottom" constant="49" id="X5u-vK-fFM"/>
+                            <constraint firstItem="Uqd-2R-aCo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gOc-hW-Nzr"/>
+                            <constraint firstItem="KuG-vf-iZG" firstAttribute="top" secondItem="ALl-nU-uXs" secondAttribute="bottom" constant="8" symbolic="YES" id="pBt-pK-Dom"/>
+                            <constraint firstItem="sc2-yI-pZi" firstAttribute="top" secondItem="hl0-2s-dw6" secondAttribute="bottom" constant="14" id="pPP-2s-iau"/>
+                            <constraint firstItem="ALl-nU-uXs" firstAttribute="top" secondItem="Uqd-2R-aCo" secondAttribute="bottom" constant="8" symbolic="YES" id="sBc-Tr-375"/>
+                            <constraint firstItem="Uqd-2R-aCo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="82" id="uEd-uB-BD2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="COd-3Q-9Sy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="347" y="132"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k55-mQ-QUt">
+            <objects>
+                <navigationController id="EI6-fR-4Zc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Ge-cp-yEw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Dvw-Ny-GUv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WWB-H5-FvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-324" y="181"/>
+        </scene>
+    </scenes>
+</document>
