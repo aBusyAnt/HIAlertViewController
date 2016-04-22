@@ -5,7 +5,7 @@ A Custom AlertViewController like UIAlertViewController after iOS8, I write this
 +  Alert
 +  ActionSheet
 
-# Views on it support 
+# Views Supported To Added 
 +  UIButton
 +  UITextField
 +  UIView
@@ -17,9 +17,9 @@ A Custom AlertViewController like UIAlertViewController after iOS8, I write this
 # Run System Required 
 iOS7+
 
-# build depends
+# Build Depends
 [Masonry](https://github.com/SnapKit/Masonry)
-
+Apple's Autolayout is so ugly,So I layout views with Masonry.
 #Reference
 [MSAlertViewController](https://github.com/szk-atmosphere/MSAlertController)
 
@@ -38,7 +38,7 @@ iOS7+
 
     hiAlert.textFieldHeight = 40.0f;
     [hiAlert addTextFieldWithConfigurationHandler:^(UITextField * textfield) {
-        textfield.text = @"fdsfasfas";
+        textfield.text = @"Grey.Luo";
         textfield.clearButtonMode = UITextFieldViewModeAlways;
         textfield.borderStyle = UITextBorderStyleNone;
         textfield.layer.borderColor = [UIColor greenColor].CGColor;
