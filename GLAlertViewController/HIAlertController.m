@@ -678,7 +678,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     //Add line between header and tableview
     UIView *line = nil;
     if (![self titleAndMessageIsNull]) {
-        UIView *line = [[UIView alloc] init];
+        line = [[UIView alloc] init];
         line.backgroundColor = self.separatorColor;
         [self.tableViewHeader addSubview:line];
         line.translatesAutoresizingMaskIntoConstraints = NO;
