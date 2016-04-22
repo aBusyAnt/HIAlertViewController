@@ -26,7 +26,10 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
 #Usage
 
 +  Alert with button and UITextfield Example
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc55306f5f7bb032d658409936ca0749d2e42ef7
     //@property (weak, nonatomic) UITextField *nameField;
 
     __weak __typeof(&*self)weakSelf = self;
@@ -55,7 +58,6 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
 
 
 +  ActionSheet With Buttons,button include icon and title
-
 
         __weak typeof(self) weakSelf = self;
 
