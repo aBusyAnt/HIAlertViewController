@@ -26,10 +26,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
 #Usage
 
 +  Alert with button and UITextfield Example
-<<<<<<< HEAD
 
-=======
->>>>>>> cc55306f5f7bb032d658409936ca0749d2e42ef7
     //@property (weak, nonatomic) UITextField *nameField;
 
     __weak __typeof(&*self)weakSelf = self;
@@ -59,17 +56,17 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
 
 +  ActionSheet With Buttons,button include icon and title
 
-        __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
 
     NSMutableAttributedString *titleAttributStr = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"SelectTitle", nil)
                                                                                         attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRGBHex:0x999999],
-                                                                                                     NSFontAttributeName:[UIFont systemFontSize:20]
+                                                                                                     NSFontAttributeName:[UIFont systemFontOfSize:20]
                                                                                                      }];
     HIAlertController *actionSheet = [HIAlertController alertControllerWithTitleAttributedString:titleAttributStr messageAttributedString:nil preferredStyle:HIAlertControllerStyleActionSheet];
     HIAlertAction *maleAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option1", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderMale];
     }];
-    maleAction.font = [UIFont systemFontSize:20];
+    maleAction.font = [UIFont systemFontOfSize:20];
     maleAction.titleColor = [UIColor colorWithRGBHex:0x000000];
     maleAction.icon = [UIImage imageNamed:@"Option1"];
     [actionSheet addAction:maleAction];
@@ -77,7 +74,7 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
     HIAlertAction *femaleAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option2", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderFemale];
     }];
-    femaleAction.font = [UIFont systemFontSize:20];
+    femaleAction.font = [UIFont systemFontOfSize:20];
     femaleAction.titleColor = [UIColor colorWithRGBHex:0x000000];
     femaleAction.icon = [UIImage imageNamed:@"Option2"];
     [actionSheet addAction:femaleAction];
@@ -85,18 +82,19 @@ Apple's Autolayout is so ugly,So I layout views with Masonry.
     HIAlertAction *otherAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Option3", nil) style:HIAlertActionStyleDefault handler:^(HIAlertAction *action) {
         [weakSelf genderChanged:HIGenderOther];
     }];
-    otherAction.font = [UIFont systemFontSize:20];
+    otherAction.font = [UIFont systemFontOfSize:20];
     otherAction.titleColor = [UIColor colorWithRGBHex:0x000000];
     otherAction.icon = [UIImage imageNamed:@"Option3"];
     [actionSheet addAction:otherAction];
 
     HIAlertAction *cancelAction = [HIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:HIAlertActionStyleCancel handler:^(HIAlertAction *action) {
     }];
-    cancelAction.font = [UIFont systemFontSize:20];
+    cancelAction.font = [UIFont systemFontOfSize:20];
     cancelAction.titleColor = [UIColor colorWithRGBHex:0x000000];
     [actionSheet addAction:cancelAction];
 
     [actionSheet showInController:self];
+
 
 
   
