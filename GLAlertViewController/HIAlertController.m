@@ -7,7 +7,6 @@
 //
 
 #import "HIAlertController.h"
-#import "UIViewController+HIPresentTransparent.h"
 #import "Masonry.h"
 
 #define PROPERTY(property) NSStringFromSelector(@selector(property))

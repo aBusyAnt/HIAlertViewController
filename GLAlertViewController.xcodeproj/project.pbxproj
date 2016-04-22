@@ -14,7 +14,6 @@
 		6793225E1CC906CD0098E0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6793225D1CC906CD0098E0FB /* Assets.xcassets */; };
 		679322611CC906CE0098E0FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6793225F1CC906CE0098E0FB /* LaunchScreen.storyboard */; };
 		6793226A1CC906E40098E0FB /* HIAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 679322691CC906E40098E0FB /* HIAlertController.m */; };
-		6793226D1CC907890098E0FB /* UIViewController+HIPresentTransparent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6793226C1CC907890098E0FB /* UIViewController+HIPresentTransparent.m */; };
 		B3EFE61CBC8960C615A2DFB9 /* libPods-GLAlertViewController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 819D150AEE0BFFC5EC137C56 /* libPods-GLAlertViewController.a */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +30,6 @@
 		679322621CC906CE0098E0FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		679322681CC906E40098E0FB /* HIAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIAlertController.h; sourceTree = "<group>"; };
 		679322691CC906E40098E0FB /* HIAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIAlertController.m; sourceTree = "<group>"; };
-		6793226B1CC907890098E0FB /* UIViewController+HIPresentTransparent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HIPresentTransparent.h"; sourceTree = "<group>"; };
-		6793226C1CC907890098E0FB /* UIViewController+HIPresentTransparent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HIPresentTransparent.m"; sourceTree = "<group>"; };
 		75F6F20312D3485DED08DF23 /* Pods-GLAlertViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLAlertViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GLAlertViewController/Pods-GLAlertViewController.debug.xcconfig"; sourceTree = "<group>"; };
 		774660CD6CEC29A9C671B142 /* Pods-GLAlertViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GLAlertViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-GLAlertViewController/Pods-GLAlertViewController.release.xcconfig"; sourceTree = "<group>"; };
 		819D150AEE0BFFC5EC137C56 /* libPods-GLAlertViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GLAlertViewController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,8 +83,6 @@
 				679322581CC906CD0098E0FB /* ViewController.m */,
 				679322681CC906E40098E0FB /* HIAlertController.h */,
 				679322691CC906E40098E0FB /* HIAlertController.m */,
-				6793226B1CC907890098E0FB /* UIViewController+HIPresentTransparent.h */,
-				6793226C1CC907890098E0FB /* UIViewController+HIPresentTransparent.m */,
 				6793225A1CC906CD0098E0FB /* Main.storyboard */,
 				6793225D1CC906CD0098E0FB /* Assets.xcassets */,
 				6793225F1CC906CE0098E0FB /* LaunchScreen.storyboard */,
@@ -234,7 +229,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6793226D1CC907890098E0FB /* UIViewController+HIPresentTransparent.m in Sources */,
 				679322591CC906CD0098E0FB /* ViewController.m in Sources */,
 				679322561CC906CD0098E0FB /* AppDelegate.m in Sources */,
 				679322531CC906CD0098E0FB /* main.m in Sources */,
