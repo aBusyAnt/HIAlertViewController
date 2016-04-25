@@ -59,7 +59,7 @@
     action2.titleColor = [UIColor greenColor];
     [hiAlert addAction:action2];
 
-    [hiAlert showInController:self animated:YES];
+    [hiAlert showInController:self];
 
 }
 - (IBAction)alertWith2Buttons:(UIButton *)sender {
@@ -124,7 +124,7 @@
     action2.titleColor = [UIColor greenColor];
     [hiAlert addAction:action2];
 
-    [hiAlert showInController:self animated:YES];
+    [hiAlert showInController:self];
 
 }
 
@@ -162,6 +162,6 @@
     action2.titleColor = [UIColor greenColor];
     [hiAlert addAction:action2];
 
-    [hiAlert showInController:self animated:YES];
+    [hiAlert showInController:self];
 }
 @end

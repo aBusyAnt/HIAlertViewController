@@ -8,7 +8,7 @@
 
 #import "HIAlertController.h"
 #import "Masonry.h"
-
+#import <objc/runtime.h>
 #define PROPERTY(property) NSStringFromSelector(@selector(property))
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
@@ -282,6 +282,8 @@ static NSDictionary *_defaultColors = nil;
 //
 @property (nonatomic) CGFloat tableHeaderHeight;
 @property (nonatomic) CGFloat tableViewContainerHeight;
+
+@property (weak,nonatomic) UIViewController *fromController;
 @end
 
 @implementation HIAlertController
@@ -340,7 +342,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(ws.view.mas_bottom).with.offset(-kActionSheetBottomMarginHeight);
         }];
-        [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {}];
     }
@@ -354,7 +356,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(ws.view.mas_bottom).with.offset(ws.tableViewContainerHeight);
         }];
-        [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {}];
     }
@@ -365,14 +367,47 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     if (self.preferredStyle == HIAlertControllerStyleActionSheet || self.preferredStyle == HIAlertControllerStyleAlert) {
         [self setupActions];
     }
-    //    [controller presentTransparentViewController:self animated:animated completion:nil];
-    [controller presentViewController:self animated:NO completion:nil];
+    WS(ws);
+    self.fromController = controller;
+    [controller presentViewController:self animated:NO completion:^{
+        [ws exchangeMethodsToPreventReloadForController:controller];
+    }];
 }
 
 - (void)dismiss {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    WS(ws);
+    [self dismissViewControllerAnimated:NO completion:^{
+        [ws exchangeMethodsToPreventReloadForController:ws.fromController];
+    }];
 }
 
+- (void)exchangeMethodsToPreventReloadForController:(UIViewController *)controller{
+    SEL systemViewWillAppearSel = @selector(viewWillAppear:);
+    SEL swizzViewWillAppearSel = @selector(swiz_viewWillAppear:);
+
+    SEL systemViewDidAppearSel = @selector(viewDidAppear:);
+    SEL swizzViewDidAppearSel = @selector(swiz_viewDidAppear:);
+
+    [self exchangeSystemSel:systemViewWillAppearSel withSwizzSel:swizzViewWillAppearSel forController:controller];
+    [self exchangeSystemSel:systemViewDidAppearSel withSwizzSel:swizzViewDidAppearSel forController:controller];
+}
+- (void)exchangeSystemSel:(SEL)systemSel withSwizzSel:(SEL)swizzSel forController:(UIViewController *)controller {
+    Class class = [controller class];
+    Method systemMethod = class_getInstanceMethod(class, systemSel);
+    Method swizzMethod = class_getInstanceMethod([self class], swizzSel);
+    BOOL isAdd= class_addMethod(class,systemSel,method_getImplementation(swizzMethod),method_getTypeEncoding(swizzMethod));
+    if(isAdd) {
+        class_replaceMethod(class,swizzSel,method_getImplementation(systemMethod),method_getTypeEncoding(systemMethod));
+    }else {
+        method_exchangeImplementations(systemMethod, swizzMethod);
+    }
+}
+- (void)swiz_viewWillAppear:(BOOL)animated {
+    //    NSLog(@"[HIAlertViewController]-->swiz_viewWillAppear");
+}
+- (void)swiz_viewDidAppear:(BOOL)animated {
+    //    NSLog(@"[HIAlertViewController]-->viewDidAppear");
+}
 #pragma  mark - Init With title and message
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                  message:(NSString *)message
@@ -854,7 +889,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     if ([action isMemberOfClass:[HIAlertAction class]] && action.handler) {
         action.handler(action);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismiss];
 }
 
 #pragma mark - MSAlertController Public Methods
@@ -1010,7 +1045,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     if ([action isMemberOfClass:[HIAlertAction class]] && action.handler) {
         action.handler(action);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismiss];
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -1029,7 +1064,7 @@ static CGFloat const kButtonCornerRadius = 6.0f;
     if ([action isMemberOfClass:[HIAlertAction class]] && action.handler) {
         action.handler(action);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismiss];
 }
 
 #pragma mark - Keyboard Notification
