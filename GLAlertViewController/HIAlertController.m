@@ -15,9 +15,6 @@
 
 @interface UIImage (Extension)
 + (UIImage *)imageWithColor:(UIColor *)color;
-//+ (UIImage *)screenshot;
-//- (UIImage *)bluredImage;
-//- (void)bluerdImageWithCompletion:(void(^)(UIImage *bluerdImage))completion;
 @end
 
 @implementation UIImage (Extension)
@@ -33,155 +30,7 @@
     UIGraphicsEndImageContext();
     return image;
 }
-
-//+ (UIImage *)screenshot {
-//    CGSize imageSize = [UIScreen mainScreen].bounds.size;
-//
-//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//    if (IOS_VERSION_LOWER_THAN_8 && UIInterfaceOrientationIsLandscape(orientation)) {
-//        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-//    }
-//
-//    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 2.0f);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
-//        CGContextSaveGState(context);
-//        CGContextTranslateCTM(context, window.center.x, window.center.y);
-//        CGContextConcatCTM(context, window.transform);
-//        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
-//
-//        if (IOS_VERSION_LOWER_THAN_8) {
-//            if (orientation == UIInterfaceOrientationLandscapeLeft) {
-//                CGContextRotateCTM(context, M_PI_2);
-//                CGContextTranslateCTM(context, 0, -imageSize.width);
-//            } else if (orientation == UIInterfaceOrientationLandscapeRight) {
-//                CGContextRotateCTM(context, -M_PI_2);
-//                CGContextTranslateCTM(context, -imageSize.height, 0);
-//            } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-//                CGContextRotateCTM(context, M_PI);
-//                CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
-//            }
-//        }
-//
-//        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-//            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
-//        } else {
-//            [window.layer renderInContext:context];
-//        }
-//        CGContextRestoreGState(context);
-//    }
-//
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return image;
-//}
-//
-//- (UIImage *)bluredImage {
-//    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer: @NO}];
-//    CIImage *inputImage = [CIImage imageWithCGImage:self.CGImage];
-//
-//    CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
-//    [gaussianBlurFilter setDefaults];
-//    [gaussianBlurFilter setValue:inputImage forKey:kCIInputImageKey];
-//    [gaussianBlurFilter setValue:@5.0f forKey:kCIInputRadiusKey];
-//
-//    CIImage *result = [gaussianBlurFilter valueForKey:kCIOutputImageKey];
-//    CGImageRef cgImage = [context createCGImage:result fromRect:inputImage.extent];
-//
-//    return [UIImage imageWithCGImage:cgImage];
-//}
-//
-//- (void)bluerdImageWithCompletion:(void(^)(UIImage *bluerdImage))completion {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-//        UIImage *bluredImage = self.bluredImage;
-//        dispatch_async(dispatch_get_main_queue(), ^(void) {
-//            if (completion) {
-//                completion(bluredImage);
-//            }
-//        });
-//    });
-//}
-
 @end
-
-//#pragma mark - MSAlertAnimation Class
-//@interface MSAlertAnimation : NSObject <UIViewControllerAnimatedTransitioning>
-//
-//@property (assign, nonatomic) BOOL isPresenting;
-//
-//@end
-//
-//@implementation MSAlertAnimation
-//
-//static CGFloat const kAnimationDuration = 0.25f;
-//
-//- (void)executePresentingAnimation:(id<UIViewControllerContextTransitioning>)transitionContext {
-//    CGSize windowSize = [UIScreen mainScreen].bounds.size;
-//    if (IOS_VERSION_LOWER_THAN_8) {
-//        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//        if (UIInterfaceOrientationIsLandscape(orientation)) {
-//            windowSize.width = [UIScreen mainScreen].bounds.size.height;
-//            windowSize.height = [UIScreen mainScreen].bounds.size.width;
-//        }
-//    }
-//    UIView *containerView = [transitionContext containerView];
-//
-//    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-//    toViewController.view.frame = CGRectMake(0.0f, 0.0f, windowSize.width, windowSize.height);
-//    toViewController.view.alpha = 0.0f;
-//    toViewController.view.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
-//    [containerView addSubview:toViewController.view];
-//
-//    [UIView animateWithDuration:kAnimationDuration delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
-//        toViewController.view.alpha = 1.0f;
-//        toViewController.view.transform = CGAffineTransformIdentity;
-//    } completion:^(BOOL finished) {
-//        if (finished) {
-//            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-//        }
-//    }];
-//}
-//
-//- (void)executeDismissingAnimation:(id<UIViewControllerContextTransitioning>)transitionContext {
-//    CGSize windowSize = [UIScreen mainScreen].bounds.size;
-//    if (IOS_VERSION_LOWER_THAN_8) {
-//        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//        if (UIInterfaceOrientationIsLandscape(orientation)) {
-//            windowSize.width = [UIScreen mainScreen].bounds.size.height;
-//            windowSize.height = [UIScreen mainScreen].bounds.size.width;
-//        }
-//    }
-//    UIView *containerView = [transitionContext containerView];
-//
-//    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-//    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-//    toViewController.view.frame = CGRectMake(0.0f, 0.0f, windowSize.width, windowSize.height);
-//    [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
-//
-//    [UIView animateWithDuration:kAnimationDuration delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
-//        fromViewController.view.alpha = 0.0f;
-//    } completion:^(BOOL finished) {
-//        if (finished) {
-//            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-//        }
-//    }];
-//}
-//
-//- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-//    return kAnimationDuration;
-//}
-//
-//- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-//    if(self.isPresenting){
-//        [self executePresentingAnimation:transitionContext];
-//    }
-//    else{
-//        [self executeDismissingAnimation:transitionContext];
-//    }
-//}
-//
-//@end
-
 
 #pragma mark -
 #pragma mark - MSAlertAction Class
@@ -336,13 +185,13 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.preferredStyle == HIAlertControllerStyleActionSheet && !IOS_VERSION_LOWER_THAN_8) {
+    if (self.preferredStyle == HIAlertControllerStyleActionSheet) {
         //Appear with animation
         WS(ws);
         [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(ws.view.mas_bottom).with.offset(-kActionSheetBottomMarginHeight);
         }];
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
+        [UIView animateWithDuration:0.2 delay:0.0f options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromBottom animations:^(void) {
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {}];
     }
@@ -350,13 +199,13 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (self.preferredStyle == HIAlertControllerStyleActionSheet && !IOS_VERSION_LOWER_THAN_8) {
+    if (self.preferredStyle == HIAlertControllerStyleActionSheet) {
         //Disappear with animation
         WS(ws);
         [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(ws.view.mas_bottom).with.offset(ws.tableViewContainerHeight);
         }];
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
+        [UIView animateWithDuration:0.2 delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void) {
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {}];
     }
@@ -462,8 +311,6 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 - (id)initWithPreferredStyle:(HIAlertControllerStyle)preferredStyle {
     self = [super init];
     if (self) {
-        //        self.transitioningDelegate = self;
-
         if (preferredStyle == HIAlertControllerStyleAlert) {
             self.titleColor = [UIColor blackColor];
             self.titleFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
@@ -485,7 +332,6 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         self.separatorColor = [UIColor colorWithRed:231.0f/255.0f green:231.0f/255.0f blue:233.0f/255.0f alpha:1.0f];
         self.textFieldMargin = 0.0f;
         self.textFieldHeight = 20.0f;
-        //        self.animation = [[MSAlertAnimation alloc] init];
         self.textFieldContainerMargin = 8.0f;
         self.titleMargin = 10.0f;
         self.messageMargin = 8.0f;
@@ -884,14 +730,11 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         self.tableViewContainerHeight = tableViewContainerHeight;
         [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(tableViewContainerHeight);
-            if(!IOS_VERSION_LOWER_THAN_8) {
-                make.bottom.equalTo(ws.view.mas_bottom).with.offset(tableViewContainerHeight);//Hide Before appear , show in didAppear with animation
-            }
+            make.bottom.equalTo(ws.view.mas_bottom).with.offset(tableViewContainerHeight);//Hide Before appear , show in didAppear with animation
         }];
+        [self.view layoutIfNeeded];
     }
 }
-
-
 
 - (HIAlertAction *)cancelAction {
     for (HIAlertAction *action in self.actions) {
@@ -1103,11 +946,11 @@ static CGFloat const kButtonCornerRadius = 6.0f;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-
+    
     WS(ws);
-
+    
     //Only Care Alert,Only Alert support UITextField
-
+    
     [self.tableViewContainer mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(ws.view);
     }];
@@ -1115,16 +958,4 @@ static CGFloat const kButtonCornerRadius = 6.0f;
         [self.view layoutIfNeeded];
     }];
 }
-
-//#pragma mark - UIViewControllerTransitioningDelegate Methods
-//- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-//    self.animation.isPresenting = YES;
-//    return self.animation;
-//}
-//
-//- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-//    self.animation.isPresenting = NO;
-//    return self.animation;
-//}
-
 @end
