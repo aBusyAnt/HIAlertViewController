@@ -3,14 +3,11 @@
 //
 //  Created by Grey.Luo on 16/4/19.
 //  Email:guohui.great@gmail.com
-//  Blog: http://grayluo.github.io/WeiFocusIo/
+//  Blog: http://study1234.com
 //
-
 
 #import <UIKit/UIKit.h>
 
-
-/////////////////////////////////////////////////////
 typedef NS_ENUM(NSInteger, HIAlertActionStyle) {
     HIAlertActionStyleDefault = 0,
     HIAlertActionStyleCancel,
@@ -75,4 +72,3 @@ typedef NS_ENUM(NSInteger, HIAlertControllerStyle) {
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *))configurationHandler;
 
 @end
-

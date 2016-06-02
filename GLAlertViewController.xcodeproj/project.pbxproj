@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6763DB551CFFBEC300481491 /* HIAlertCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6763DB541CFFBEC300481491 /* HIAlertCustomView.m */; };
 		679322531CC906CD0098E0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 679322521CC906CD0098E0FB /* main.m */; };
 		679322561CC906CD0098E0FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 679322551CC906CD0098E0FB /* AppDelegate.m */; };
 		679322591CC906CD0098E0FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 679322581CC906CD0098E0FB /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6763DB531CFFBEC300481491 /* HIAlertCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIAlertCustomView.h; sourceTree = "<group>"; };
+		6763DB541CFFBEC300481491 /* HIAlertCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIAlertCustomView.m; sourceTree = "<group>"; };
 		6793224E1CC906CD0098E0FB /* GLAlertViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLAlertViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		679322521CC906CD0098E0FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		679322541CC906CD0098E0FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -83,6 +86,8 @@
 				679322581CC906CD0098E0FB /* ViewController.m */,
 				679322681CC906E40098E0FB /* HIAlertController.h */,
 				679322691CC906E40098E0FB /* HIAlertController.m */,
+				6763DB531CFFBEC300481491 /* HIAlertCustomView.h */,
+				6763DB541CFFBEC300481491 /* HIAlertCustomView.m */,
 				6793225A1CC906CD0098E0FB /* Main.storyboard */,
 				6793225D1CC906CD0098E0FB /* Assets.xcassets */,
 				6793225F1CC906CE0098E0FB /* LaunchScreen.storyboard */,
@@ -230,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				679322591CC906CD0098E0FB /* ViewController.m in Sources */,
+				6763DB551CFFBEC300481491 /* HIAlertCustomView.m in Sources */,
 				679322561CC906CD0098E0FB /* AppDelegate.m in Sources */,
 				679322531CC906CD0098E0FB /* main.m in Sources */,
 				6793226A1CC906E40098E0FB /* HIAlertController.m in Sources */,
